@@ -39,24 +39,25 @@ function addUser() {
 
 
 
-function getUsers() {
-    fetch(url).then(response => response.json().then((elm) => {
+async function getUsers() {
+    return fetch(url).then(response => response.json().then((elm) => {
         elm.data.forEach((element: any) => {
             let ul = document.getElementById('list_name')
             let li = document.createElement('option')
             ul.appendChild(li)
             li.innerHTML = `<option class ="dropdown-item">${element.username}</option>`
             let butt_name = document.getElementById("butt_name")
-          
             //@ts-ignore
             // butt_name.addEventListener('submit', function (e) {
             //     //@ts-ignore
             //     username2.innerhtml = butt_name.value
             // })
         })
+        console.log("mon elm 2", elm)
         return elm
-    })) 
-   
+    }
+    ))
+
 }
 
 function addTicket() {
@@ -87,18 +88,17 @@ function disableTicket(element?: any) {
 }
 
 
-
-
 function showArray() {
     //1. APPELLER LES FONCTIONS NECESSAIRES
 
-    getTickets()
-    getUsers()
+    const mavariable = getUsers().then(elm => console.log(elm));
+    
+    // getUsers()
 
     //2. CIBLER LES ELEMENTS
 
     let formBody = document.getElementById("formBody")
-
+    console.log("mavar:", mavariable)
     //3. INJECTER LA DATA 
     formBody.innerHTML =
         `
