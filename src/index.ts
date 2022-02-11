@@ -53,6 +53,7 @@ function getUsers() {
             //     //@ts-ignore
             //     username2.innerhtml = butt_name.value
             // })
+        
         })
         return elm
     })) 
@@ -77,7 +78,7 @@ function getTickets(element?: any) {
 
     fetch(url).then(response => response.json().then((element) => console.log(element)))
     return element
-}
+}   const user=
 
 
 
@@ -107,10 +108,7 @@ function showArray() {
     <td>Naima</td>
     <td>texte</td>
     <td>11/12</td>
-    
-    </tr>
-    `
-
+    const user=
 
 
 
