@@ -1,7 +1,7 @@
 
 
 // constantes
-const url = 'https://web-help-request-api.herokuapp.com'
+const url = 'https://web-help-request-api.herokuapp.com/users'
 //@ts-ignore
 
 
@@ -74,28 +74,3 @@ function disableTicket(element?: any) {
     const url = `https://web-help-request-api.herokuapp.com/tickets`
     fetch(url).then(response => response.json().then((element) => console.log(element.data[0].done)))
 }
-
-
-function showArray() {
-    //1. APPELLER LES FONCTIONS NECESSAIRES
-
-    getTickets()
-    getUsers()
-
-    //2. CIBLER LES ELEMENTS ET INJECTER LA DATA 
-
-    let formBody = document.getElementById("formBody").innerHTML = `
-    <tr>
-    <th scope="row">1</th>
-    <td>Naima</td>
-    <td>texte</td>
-    <td>11/12</td>
-    
-    </tr>
-    `
-
-
-
-}
-
-showArray()
