@@ -3,15 +3,12 @@
 // constantes
 const url = 'https://web-help-request-api.herokuapp.com/users'
 //@ts-ignore
-
+const username2: string = document.getElementById('username').value
 
 // variables 
 let button = document.getElementById('butt')
 
-
-
 // function 
-
 
 button.addEventListener('click', function (e) {
     addUser()
@@ -20,7 +17,7 @@ button.addEventListener('click', function (e) {
 
 function addUser() {
     //@ts-ignore
-    const username2: string = document.getElementById('username').value
+
     //@ts-ignore
     const password = document.getElementById('password').value
     console.log(username2)
@@ -40,11 +37,27 @@ function addUser() {
 }
 
 
+
+
 function getUsers() {
     fetch(url).then(response => response.json().then((elm) => {
-        console.log(elm)
+        console.log(elm.data.forEach((element: any) => {
+            let ul = document.getElementById('list_name')
+            let li = document.createElement('option')
+            ul.appendChild(li)
+            li.innerHTML = `<option class ="dropdown-item">${element.username}</option>`
+            let butt_name = document.getElementById("butt_name")
+            //@ts-ignore
+            butt_name.addEventListener('submit', function (e) {
+                //@ts-ignore
+                username2.innerhtml = butt_name.value
+            })
+        }))
     }))
 }
+getUsers()
+
+
 
 
 
@@ -67,10 +80,13 @@ function getTickets(element?: any) {
     fetch(url).then(response => response.json().then((element) => console.log(element)))
 }
 
-getTickets()
 
 
 function disableTicket(element?: any) {
     const url = `https://web-help-request-api.herokuapp.com/tickets`
     fetch(url).then(response => response.json().then((element) => console.log(element.data[0].done)))
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5ee6be8166883e91ec85b5c2c84a99863092e8d8
