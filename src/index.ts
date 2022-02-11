@@ -86,7 +86,37 @@ function disableTicket(element?: any) {
     const url = `https://web-help-request-api.herokuapp.com/tickets`
     fetch(url).then(response => response.json().then((element) => console.log(element.data[0].done)))
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> 5ee6be8166883e91ec85b5c2c84a99863092e8d8
+
+
+
+function showArray() {
+    //1. APPELLER LES FONCTIONS NECESSAIRES
+
+    getTickets()
+    getUsers()
+
+    //2. CIBLER LES ELEMENTS
+
+    let formBody = document.getElementById("formBody")
+
+    //3. INJECTER LA DATA 
+    formBody.innerHTML =
+        `
+    <tr>
+    <th scope="row">1</th>
+    <td>Naima</td>
+    <td>texte</td>
+    <td>11/12</td>
+    
+    </tr>
+    `
+
+
+
+
+
+
+}
+
+showArray()
