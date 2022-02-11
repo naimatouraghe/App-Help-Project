@@ -1,7 +1,7 @@
 
 
 // constantes
-const url = 'https://web-help-request-api.herokuapp.com/users'
+const url = 'https://web-help-request-api.herokuapp.com'
 //@ts-ignore
 
 
@@ -11,8 +11,7 @@ let button = document.getElementById('butt')
 
 
 // function 
-let username = "Capitaine Crochet"
-let password = "1234"
+
 
 button.addEventListener('click', function(e){
     addUser()
@@ -22,6 +21,8 @@ button.addEventListener('click', function(e){
 function addUser() {
     //@ts-ignore
     const username2: string = document.getElementById('username').value
+    //@ts-ignore
+    const password = document.getElementById('password').value
     console.log(username2)  
         let url = 'https://web-help-request-api.herokuapp.com/users'
     fetch(url,{
@@ -45,7 +46,6 @@ function getUsers() {
 }))}
 
 
-getUsers()
 
 function addTicket() {
     let url = 'https://web-help-request-api.herokuapp.com/tickets'
@@ -64,9 +64,9 @@ function getTickets(element?: any) {
     let url ='https://web-help-request-api.herokuapp.com/tickets'
 
     fetch(url).then(response => response.json().then((element) => console.log(element)))
-
 } 
 
+getTickets()
 
 
 function disableTicket(element?: any) {
