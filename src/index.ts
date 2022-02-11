@@ -1,7 +1,7 @@
 
 
 // constantes
-const url = 'https://web-help-request-api.herokuapp.com'
+const url = 'https://web-help-request-api.herokuapp.com/users'
 //@ts-ignore
 
 
@@ -45,7 +45,7 @@ function getUsers() {
         console.log(elm)
 }))}
 
-
+getUsers()
 
 function addTicket() {
     let url = 'https://web-help-request-api.herokuapp.com/tickets'
@@ -66,7 +66,7 @@ function getTickets(element?: any) {
     fetch(url).then(response => response.json().then((element) => console.log(element)))
 } 
 
-getTickets()
+
 
 
 function disableTicket(element?: any) {
