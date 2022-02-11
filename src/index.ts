@@ -75,8 +75,8 @@ function addTicket() {
 async function getTickets(element?: any) {
     let url = 'https://web-help-request-api.herokuapp.com/tickets'
 
-   return fetch(url).then(response => response.json().then((element) => {return(element)}))
- 
+    return fetch(url).then(response => response.json().then((element) => { return (element) }))
+
 }
 getTickets()
 
@@ -94,29 +94,30 @@ function showArray() {
 
     getTickets().then((elm: any) => {
         getUsers().then((element: any) => {
-        //    async function getUsersId(){
-        //        for (let i=0; element.length; i++){
-        //              if (elm.data[i].users_id == element[i].id){
-        //             return console.log(element.username)
-        //        }
-        //        }
-             
-        //    }
-        //console.log("mavar:", mavariable)
-        //3. INJECTER LA DATA 
-        
-        console.log('mon elm:',elm)
-        let username = ''
-        elm.data.forEach((elm: any) => {
-            element.data.forEach((element:any) => {
-                if(elm.users_id == element.id){
-                    console.log('ok')
-                    username = element.username
-                    return console.log(username)
-                }
+            //    async function getUsersId(){
+            //        for (let i=0; element.length; i++){
+            //              if (elm.data[i].users_id == element[i].id){
+            //             return console.log(element.username)
+            //        }
+            //        }
 
-            formBody.innerHTML +=
-            `
+            //    }
+            //console.log("mavar:", mavariable)
+            //3. INJECTER LA DATA 
+
+            console.log('mon elm:', elm)
+            let username = ''
+            elm.data.forEach((elm: any) => {
+                element.data.forEach((element: any) => {
+                    if (elm.users_id == element.id) {
+                        console.log('ok')
+                        username = element.username
+                        return console.log(username)
+                    }
+                }
+                    ,
+                    formBody.innerHTML +=
+                        `
         <tr>
         <th scope="row">${elm.id}</th>
         <td>${username}</td>
@@ -125,12 +126,14 @@ function showArray() {
         
         </tr>
         `
-            })
-          
+                )
 
-        });   
-        })}
-    )};
-    // getUsers()
+
+            });
+        })
+    }
+    )
+};
+// getUsers()
 
 showArray()
