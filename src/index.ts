@@ -91,7 +91,7 @@ let formBody = document.getElementById("formBody")
 
 function showArray() {
     //1. APPELLER LES FONCTIONS NECESSAIRES
-
+    let username =""
     getTickets().then((elm: any) => {
         getUsers().then((element: any) => {
             //    async function getUsersId(){
@@ -104,12 +104,11 @@ function showArray() {
             //    }
             //console.log("mavar:", mavariable)
             //3. INJECTER LA DATA 
-
             console.log('mon elm:', elm)
-            let username = ''
             elm.data.forEach((elm: any) => {
                 element.data.forEach((element: any) => {
                     if (elm.users_id == element.id) {
+                        
                         console.log('ok')
                         username = element.username
                         return console.log(username)
