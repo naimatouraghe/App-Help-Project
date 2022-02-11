@@ -82,7 +82,6 @@ function getTickets(element?: any) {
 
 
 
-
 function disableTicket(element?: any) {
     const url = `https://web-help-request-api.herokuapp.com/tickets`
     fetch(url).then(response => response.json().then((element) => console.log(element.data[0].done)))
