@@ -52,7 +52,7 @@ async function getUsers() {
             //     //@ts-ignore
             //     username2.innerhtml = butt_name.value
             // })
-        
+
         })
         console.log("mon elm 2", elm)
         return elm
@@ -77,8 +77,8 @@ function addTicket() {
 async function getTickets(element?: any) {
     let url = 'https://web-help-request-api.herokuapp.com/tickets'
 
-   return fetch(url).then(response => response.json().then((element) => {return(element)}))
- 
+    return fetch(url).then(response => response.json().then((element) => { return (element) }))
+
 }
 getTickets()
 
@@ -96,14 +96,17 @@ function showArray() {
 
     getTickets().then((elm: any) => {
         getUsers().then((element: any) => {
-           
-        //console.log("mavar:", mavariable)
-        //3. INJECTER LA DATA 
-        console.log(elm)
-        elm.data.forEach((elm: any) => {
-            console.log(elm.data)
-            formBody.innerHTML +=
-            `
+            if(elm.user_id ==  element.id)
+            {
+                return console.log(elm.user_id);
+            }
+            //console.log("mavar:", mavariable)
+            //3. INJECTER LA DATA 
+            console.log(elm)
+            elm.data.forEach((elm: any) => {
+                console.log(elm.data)
+                formBody.innerHTML +=
+                    `
         <tr>
         <th scope="row">${elm.id}</th>
         <td>${elm.users_id}</td>
@@ -113,9 +116,11 @@ function showArray() {
         </tr>
         `
 
-        });   
-        })}
-    )};
-    // getUsers()
+            });
+        })
+    }
+    )
+};
+// getUsers()
 
 showArray()
