@@ -73,13 +73,13 @@ function addTicket() {
     })
 }
 
-function getTickets(element?: any) {
+async function getTickets(element?: any) {
     let url = 'https://web-help-request-api.herokuapp.com/tickets'
 
-    fetch(url).then(response => response.json().then((element) => console.log(element)))
-    return element
+   return fetch(url).then(response => response.json().then((element) => {return(element)}))
+ 
 }
-
+getTickets()
 
 
 function disableTicket(element?: any) {
@@ -88,34 +88,33 @@ function disableTicket(element?: any) {
 }
 
 
+let formBody = document.getElementById("formBody")
+
 function showArray() {
     //1. APPELLER LES FONCTIONS NECESSAIRES
 
-    const mavariable = getUsers().then(elm => console.log(elm));
-    
-    // getUsers()
-
-    //2. CIBLER LES ELEMENTS
-
-    let formBody = document.getElementById("formBody")
-    console.log("mavar:", mavariable)
-    //3. INJECTER LA DATA 
-    formBody.innerHTML =
+    getTickets().then((elm: any) => {
+        getUsers().then((element: any) => {
+           
+        //console.log("mavar:", mavariable)
+        //3. INJECTER LA DATA 
+        console.log(elm)
+        elm.data.forEach((elm: any) => {
+            console.log(elm.data)
+            formBody.innerHTML +=
+            `
+        <tr>
+        <th scope="row">${elm.id}</th>
+        <td>${elm.users_id}</td>
+        <td>${elm.subject}</td>
+        <td>${elm.date}</td>
+        
+        </tr>
         `
-    <tr>
-    <th scope="row">1</th>
-    <td>Naima</td>
-    <td>texte</td>
-    <td>11/12</td>
-    
-    </tr>
-    `
 
-
-
-
-
-
-}
+        });   
+        })}
+    )};
+    // getUsers()
 
 showArray()
