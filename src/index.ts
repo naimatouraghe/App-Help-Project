@@ -54,7 +54,6 @@ async function getUsers() {
             // })
 
         })
-        console.log("mon elm 2", elm)
         return elm
     }
     ))
@@ -96,25 +95,39 @@ function showArray() {
 
     getTickets().then((elm: any) => {
         getUsers().then((element: any) => {
-            if(elm.user_id ==  element.id)
-            {
-                return console.log(elm.user_id);
-            }
-            //console.log("mavar:", mavariable)
-            //3. INJECTER LA DATA 
-            console.log(elm)
-            elm.data.forEach((elm: any) => {
-                console.log(elm.data)
-                formBody.innerHTML +=
-                    `
+        //    async function getUsersId(){
+        //        for (let i=0; element.length; i++){
+        //              if (elm.data[i].users_id == element[i].id){
+        //             return console.log(element.username)
+        //        }
+        //        }
+             
+        //    }
+        //console.log("mavar:", mavariable)
+        //3. INJECTER LA DATA 
+        
+        console.log('mon elm:',elm)
+        let username = ''
+        elm.data.forEach((elm: any) => {
+            element.data.forEach((element:any) => {
+                if(elm.users_id == element.id){
+                    console.log('ok')
+                    username = element.username
+                    return console.log(username)
+                }
+
+            formBody.innerHTML +=
+            `
         <tr>
         <th scope="row">${elm.id}</th>
-        <td>${elm.users_id}</td>
+        <td>${username}</td>
         <td>${elm.subject}</td>
         <td>${elm.date}</td>
         
         </tr>
         `
+            })
+          
 
             });
         })
