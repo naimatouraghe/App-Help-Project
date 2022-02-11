@@ -48,10 +48,10 @@ function getUsers() {
             li.innerHTML = `<option class ="dropdown-item">${element.username}</option>`
             let butt_name = document.getElementById("butt_name")
             //@ts-ignore
-            butt_name.addEventListener('submit', function (e) {
-                //@ts-ignore
-                username2.innerhtml = butt_name.value
-            })
+            // butt_name.addEventListener('submit', function (e) {
+            //     //@ts-ignore
+            //     username2.innerhtml = butt_name.value
+            // })
         }))
     }))
 }
@@ -86,3 +86,37 @@ function disableTicket(element?: any) {
     const url = `https://web-help-request-api.herokuapp.com/tickets`
     fetch(url).then(response => response.json().then((element) => console.log(element.data[0].done)))
 }
+
+
+
+
+function showArray() {
+    //1. APPELLER LES FONCTIONS NECESSAIRES
+
+    getTickets()
+    getUsers()
+
+    //2. CIBLER LES ELEMENTS
+
+    let formBody = document.getElementById("formBody")
+
+    //3. INJECTER LA DATA 
+    formBody.innerHTML =
+        `
+    <tr>
+    <th scope="row">1</th>
+    <td>Naima</td>
+    <td>texte</td>
+    <td>11/12</td>
+    
+    </tr>
+    `
+
+
+
+
+
+
+}
+
+showArray()
