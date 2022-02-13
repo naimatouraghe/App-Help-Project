@@ -3,7 +3,7 @@
 // constantes
 const url = 'https://web-help-request-api.herokuapp.com/users'
 //@ts-ignore
-const username2: string = document.getElementById('username').value
+
 
 // variables 
 let button = document.getElementById('butt')
@@ -11,13 +11,13 @@ let button = document.getElementById('butt')
 // function 
 
 button.addEventListener('click', function (e) {
-    addUser()
+    addTicket()
 })
 
 
 function addUser() {
     //@ts-ignore
-
+    const username2: string = document.getElementById('username').value
     //@ts-ignore
     const password = document.getElementById('password').value
     console.log(username2)
@@ -45,7 +45,7 @@ async function getUsers() {
             let ul = document.getElementById('list_name')
             let li = document.createElement('option')
             ul.appendChild(li)
-            li.innerHTML = `<option class ="dropdown-item">${element.username}</option>`
+            li.innerHTML = `<option class ="dropdown-item" id ="ticket_user">${element.id}---${element.username}</option>`
             let butt_name = document.getElementById("butt_name")
             //@ts-ignore
             // butt_name.addEventListener('submit', function (e) {
@@ -62,16 +62,29 @@ async function getUsers() {
 
 function addTicket() {
     let url = 'https://web-help-request-api.herokuapp.com/tickets'
+    //@ts-ignore
+    const ticket: string = document.getElementById('username').value
+    //@ts-ignore
+    const ticket_user: any = document.getElementById('ticket_user')
+    const getOption = ticket_user.value
+    const arrgetOption = getOption.split("")
+    const id = arrgetOption[0]
+    console.log(ticket, id)
+    
     fetch(url, {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
         method: "POST",
-        body: `subject=Nouvelle Methode&userId=14`,
+        body: new URLSearchParams({
+            'subject': `${ticket}`,
+            'userId': `${id}`
+        }),
     }).then(response => {
         return console.log(response)
     })
 }
+
 
 async function getTickets(element?: any) {
     let url = 'https://web-help-request-api.herokuapp.com/tickets'
@@ -86,7 +99,7 @@ function disableTicket(element?: any) {
     const url = `https://web-help-request-api.herokuapp.com/tickets`
     fetch(url).then(response => response.json().then((element) => console.log(element.data[0].done)))
 }
-
+getUsers()
 
 let formBody = document.getElementById("formBody")
 
@@ -106,6 +119,7 @@ function showArray() {
             //console.log("mavar:", mavariable)
             //3. INJECTER LA DATA 
             console.log('mon elm:', tickets)
+            console.log("mon user:",users)
             tickets.data.forEach((ticket: any) => {
             //    users.data.filter ((element: any )=> {
             //         element.id == ticket.users_id
