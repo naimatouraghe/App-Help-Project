@@ -91,10 +91,10 @@ function disableTicket(element?: any) {
 let formBody = document.getElementById("formBody")
 
 function showArray() {
+    let username: string;
     //1. APPELLER LES FONCTIONS NECESSAIRES
-    let username:any;
-    getTickets().then((elm: any) => {
-        getUsers().then((element: any) => {
+    getTickets().then((tickets: any) => {
+        getUsers().then((users: any) => {
             //    async function getUsersId(){
             //        for (let i=0; element.length; i++){
             //              if (elm.data[i].users_id == element[i].id){
@@ -105,30 +105,30 @@ function showArray() {
             //    }
             //console.log("mavar:", mavariable)
             //3. INJECTER LA DATA 
-            console.log('mon elm:', elm)
-            elm.data.forEach((elm: any) => {
-                element.data.forEach((element: any) => {
-                    if (elm.users_id == element.id) {
+            console.log('mon elm:', tickets)
+            tickets.data.forEach((ticket: any) => {
+            //    users.data.filter ((element: any )=> {
+            //         element.id == ticket.users_id
+            //         username = element.username
+            //     })
+                users.data.forEach((user: any) => {
+                    console.log(ticket.users_id == user.id)
+                    if (ticket.users_id == user.id) {
+                        username = user.username
                         
-                        console.log('ok')
-                        username = element.username
-                        return console.log(username)
+                        //return console.log(username)
                     }
-                }
-                    ,
-                    formBody.innerHTML +=
-                        `
-        <tr>
-        <th scope="row">${elm.id}</th>
-        <td>${username}</td>
-        <td>${elm.subject}</td>
-        <td>${elm.date}</td>
-        
-        </tr>
-        `
-                )
-
-
+                });
+                formBody.innerHTML +=
+                            `
+                            <tr>
+                            <th scope="row">${ticket.id}</th>
+                            <td>${username}</td>
+                            <td>${ticket.subject}</td>
+                            <td>${ticket.date}</td>
+                            
+                            </tr>
+                            `
             });
         })
     }
