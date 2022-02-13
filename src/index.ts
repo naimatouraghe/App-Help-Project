@@ -7,6 +7,7 @@ const url = 'https://web-help-request-api.herokuapp.com/users'
 
 // variables 
 let button = document.getElementById('butt')
+//let patch = document.getElementById('btnpatch')
 
 // function 
 
@@ -37,8 +38,6 @@ function addUser() {
 }
 
 
-
-
 async function getUsers() {
     return fetch(url).then(response => response.json().then((elm) => {
         elm.data.forEach((element: any) => {
@@ -47,11 +46,6 @@ async function getUsers() {
             ul.appendChild(li)
             li.innerHTML = `<option class ="dropdown-item" id ="ticket_user">${element.id}---${element.username}</option>`
             let butt_name = document.getElementById("butt_name")
-            //@ts-ignore
-            // butt_name.addEventListener('submit', function (e) {
-            //     //@ts-ignore
-            //     username2.innerhtml = butt_name.value
-            // })
 
         })
         return elm
@@ -65,12 +59,10 @@ function addTicket() {
     //@ts-ignore
     const ticket: string = document.getElementById('username').value
     //@ts-ignore
-    const ticket_user: any = document.getElementById('ticket_user')
-    const getOption = ticket_user.value
-    const arrgetOption = getOption.split("")
+    const ticket_user: any = document.getElementById('ticket_user').value;
+    const arrgetOption = ticket_user.split("")
     const id = arrgetOption[0]
-    console.log(ticket, id)
-    
+
     fetch(url, {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -87,6 +79,7 @@ function addTicket() {
 
 
 async function getTickets(element?: any) {
+
     let url = 'https://web-help-request-api.herokuapp.com/tickets'
 
     return fetch(url).then(response => response.json().then((element) => { return (element) }))
@@ -95,59 +88,49 @@ async function getTickets(element?: any) {
 getTickets()
 
 
-function disableTicket(element?: any) {
-    const url = `https://web-help-request-api.herokuapp.com/tickets`
-    fetch(url).then(response => response.json().then((element) => console.log(element.data[0].done)))
+  function disableTicket() {
+        fetch('https://web-help-request-api.herokuapp.com/tickets').then((response)=>response.json().then((data)=>{
+            fetch(`https://web-help-request-api.herokuapp.com/tickets/${data.data[0].id}`,{
+                method: 'PATCH'
+            })
+        }))
+
 }
 getUsers()
 
 let formBody = document.getElementById("formBody")
-
 function showArray() {
     let username: string;
     //1. APPELLER LES FONCTIONS NECESSAIRES
     getTickets().then((tickets: any) => {
         getUsers().then((users: any) => {
-            //    async function getUsersId(){
-            //        for (let i=0; element.length; i++){
-            //              if (elm.data[i].users_id == element[i].id){
-            //             return console.log(element.username)
-            //        }
-            //        }
-
-            //    }
-            //console.log("mavar:", mavariable)
             //3. INJECTER LA DATA 
             console.log('mon elm:', tickets)
-            console.log("mon user:",users)
+            console.log("mon user:", users)
             tickets.data.forEach((ticket: any) => {
-            //    users.data.filter ((element: any )=> {
-            //         element.id == ticket.users_id
-            //         username = element.username
-            //     })
-                users.data.forEach((user: any) => {
-                    console.log(ticket.users_id == user.id)
-                    if (ticket.users_id == user.id) {
-                        username = user.username
-                        
-                        //return console.log(username)
-                    }
-                });
+                users.data.filter((element: any) => {
+                    if (element.id == ticket.users_id)
+                        username = element.username
+                })
                 formBody.innerHTML +=
-                            `
+                    `
                             <tr>
                             <th scope="row">${ticket.id}</th>
                             <td>${username}</td>
                             <td>${ticket.subject}</td>
-                            <td>${ticket.date}</td>
-                            
+                            <td>${ticket.date}</td>                            
                             </tr>
                             `
             });
+            
         })
     }
     )
 };
-// getUsers()
 
 showArray()
+//patch.addEventListener('click', disableTicket)
+let button1 = document.getElementById('butt1');
+button1.addEventListener('click',(e)=>{
+    disableTicket();
+})
